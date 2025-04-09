@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Диаграммы магазина косметики</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fefefe;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        canvas {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <canvas id="pieDoughnutChart" width="400" height="400"></canvas>
+    <canvas id="radarChart" width="400" height="400"></canvas>
+</div>
+
+<script>
+    var ctxPieDoughnut = document.getElementById('pieDoughnutChart').getContext('2d');
+    var pieDoughnutChart = new Chart(ctxPieDoughnut, {
+        type: 'doughnut',
+        data: {
+            labels: ['Кремы', 'Тушь', 'Помады', 'Маски'],
+            datasets: [{
+                label: 'Продажи',
+                data: [450, 300, 200, 150],
+                backgroundColor: ['#FFB6C1', '#9370DB', '#FF69B4', '#90EE90'],
+                hoverBackgroundColor: ['#FF69B4', '#8A2BE2', '#FF1493', '#66CDAA']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: { enabled: true }
+            }
+        }
+    });
+
+    var ctxRadar = document.getElementById('radarChart').getContext('2d');
+    var radarChart = new Chart(ctxRadar, {
+        type: 'radar',
+        data: {
+            labels: ['Увлажнение', 'Стойкость', 'Аромат', 'Легкость нанесения', 'Цена'],
+            datasets: [{
+                label: 'Бренд A',
+                data: [80, 75, 85, 90, 70],
+                backgroundColor: 'rgba(255, 182, 193, 0.2)',
+                borderColor: '#FF69B4',
+                borderWidth: 2
+            }, {
+                label: 'Бренд B',
+                data: [70, 80, 75, 85, 65],
+                backgroundColor: 'rgba(147, 112, 219, 0.2)',
+                borderColor: '#9370DB',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                    min: 0,
+                    max: 100,
+                    ticks: { stepSize: 20 }
+                }
+            },
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: { enabled: true }
+            }
+        }
+    });
+</script>
+</body>
+</html>
